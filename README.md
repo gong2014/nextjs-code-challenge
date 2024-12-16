@@ -6,31 +6,22 @@ First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Overview
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project implements authentication using middleware. User authentication status is managed through cookies. Upon accessing any page, the middleware automatically checks if the user is authenticated. If the user is not authenticated, they will be redirected to the login or registration page.
 
-## Learn More
+Currently, the project includes functions to create and update user accounts. However, a logout function has not been implemented yet. If required, I can add it. For testing purposes, you can manually remove the authentication cookie via the Application tab in your browser’s developer console.
 
-To learn more about Next.js, take a look at the following resources:
+## Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Character List and Details:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+On the home page, you will find a paginated list of characters. Clicking on a character will take you to its detail page.
 
-## Deploy on Vercel
+### Pagination with Direct Linking:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The pagination system allows you to browse through the list of characters. Additionally, you can directly navigate to a specific page using a URL (e.g., ?page=2).

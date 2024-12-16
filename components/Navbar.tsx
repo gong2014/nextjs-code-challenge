@@ -22,13 +22,13 @@ export default async function NavBar() {
               <Text fontWeight="medium">{userInfo.userName}</Text>
               <Text color="gray.500">{userInfo.jobTitle}</Text>
               <Link href="/signup" passHref>
-                <Button>Update Profile </Button>
+                <Button size={"xs"}>Update Profile </Button>
               </Link>
             </HStack>
           ) : (
             <HStack>
               <Link href="/signup" passHref>
-                <Button colorScheme="blue">Sign Up</Button>
+                <Button>Sign Up</Button>
               </Link>
             </HStack>
           )}

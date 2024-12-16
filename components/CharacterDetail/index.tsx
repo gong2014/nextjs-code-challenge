@@ -1,5 +1,5 @@
 "use client";
-import { DataListItem, HStack } from "@chakra-ui/react";
+import { HStack } from "@chakra-ui/react";
 
 import {
   DrawerBackdrop,
@@ -11,9 +11,8 @@ import {
   DrawerTitle,
 } from "@/components/ui/drawer";
 
-import { DataListRoot } from "./ui/data-list";
 import { Character } from "@/type/models";
-import Image from "next/image";
+import { CharacterDetail } from "./Detail";
 
 export const UserDetail = ({
   character,
@@ -36,30 +35,11 @@ export const UserDetail = ({
         <DrawerBackdrop />
         <DrawerContent>
           <DrawerHeader>
-            <DrawerTitle>User Details</DrawerTitle>
+            <DrawerTitle>Character Details</DrawerTitle>
           </DrawerHeader>
           <DrawerBody>
-            <DataListRoot orientation="horizontal" divideY="1px" maxW="md">
-              {userDetails?.map((detail) => (
-                <DataListItem pt="4" key={detail.key}>
-                  {detail.key === "image" ? (
-                    <Image
-                      src={detail.value}
-                      alt={detail.key}
-                      width={100}
-                      height={100}
-                      className="w-1/2 mx-auto"
-                    />
-                  ) : (
-                    <div>
-                      <strong>{detail.key}:</strong> {detail.value}
-                    </div>
-                  )}
-                </DataListItem>
-              ))}
-            </DataListRoot>
+            <CharacterDetail userDetails={userDetails} />
           </DrawerBody>
-
           <DrawerCloseTrigger />
         </DrawerContent>
       </DrawerRoot>

@@ -22,8 +22,6 @@ export default function Home() {
     jobTitle: "",
   });
 
-  console.log("state", userInfo);
-
   const [error, setError] = useState(false);
 
   const handleInputChange = (field: keyof UserInfo, value: string) => {
@@ -50,36 +48,19 @@ export default function Home() {
     }
   };
 
-  // useEffect(() => {
-  //   const getCookie = (name: string) => {
-  //     const cookies = document.cookie.split("; ");
-  //     const cookie = cookies.find((row) => row.startsWith(`${name}=`));
-  //     return cookie ? cookie.split("=")[1] : null;
-  //   };
-
-  //   const userInfo = JSON.parse(
-  //     decodeURIComponent(getCookie("userInfo") || "{}")
-  //   );
-  //   setUserInfo(userInfo);
-  // }, []);
-
   useEffect(() => {
-    const fetchAPI = async () => {
-      const response = await fetch("/api/auth/cookie");
-      const userInfo = await response.json();
-      const test = JSON.parse(userInfo);
-      console.log("userInfo", test);
-      setUserInfo((pre) => ({
-        ...pre,
-        ...test,
-      }));
+    const getCookie = (name: string) => {
+      const cookies = document.cookie.split("; ");
+      const cookie = cookies.find((row) => row.startsWith(`${name}=`));
+      return cookie ? cookie.split("=")[1] : null;
     };
 
-    fetchAPI();
-    // setUserInfo((pre) => ({
-    //   ...pre,
-    //   userName: "david",
-    // }));
+    const userInfo = JSON.parse(
+      decodeURIComponent(getCookie("userInfo") || "{}")
+    );
+    if (userInfo?.userName) {
+      setUserInfo(userInfo);
+    }
   }, []);
 
   return (

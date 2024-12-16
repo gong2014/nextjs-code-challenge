@@ -21,6 +21,9 @@ export default function Home() {
     userName: "",
     jobTitle: "",
   });
+
+  console.log("state", userInfo);
+
   const [error, setError] = useState(false);
 
   const handleInputChange = (field: keyof UserInfo, value: string) => {
@@ -46,25 +49,42 @@ export default function Home() {
       console.log(`login fail ${response}`);
     }
   };
-  const fetchCookie = async () => {
-    try {
-      const response = await fetch("/api/auth/cookie");
-      const data = await response.json();
-      console.log("data", data);
-    } catch (error) {
-      console.error("Error fetching cookie:", error);
-    }
-  };
+
+  // useEffect(() => {
+  //   const getCookie = (name: string) => {
+  //     const cookies = document.cookie.split("; ");
+  //     const cookie = cookies.find((row) => row.startsWith(`${name}=`));
+  //     return cookie ? cookie.split("=")[1] : null;
+  //   };
+
+  //   const userInfo = JSON.parse(
+  //     decodeURIComponent(getCookie("userInfo") || "{}")
+  //   );
+  //   setUserInfo(userInfo);
+  // }, []);
 
   useEffect(() => {
-    fetchCookie();
+    const fetchAPI = async () => {
+      const response = await fetch("/api/auth/cookie");
+      const userInfo = await response.json();
+      const test = JSON.parse(userInfo);
+      console.log("userInfo", test);
+      setUserInfo((pre) => ({
+        ...pre,
+        ...test,
+      }));
+    };
+
+    fetchAPI();
+    // setUserInfo((pre) => ({
+    //   ...pre,
+    //   userName: "david",
+    // }));
   }, []);
 
   return (
     <Container className="w-full h-[calc(100vh-200px)] flex flex-col justify-center items-center">
-      <Heading size="2xl" className="mb-6">
-        Leonardo.Ai Coding Test
-      </Heading>
+      <Heading size="2xl" className="mb-6"></Heading>
       <Card.Root maxW="sm">
         <Card.Header>
           {error && <Alert status="error" title="Login Fail" />}

@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html suppressHydrationWarning>
-      <body>
+      <body className="max-w-[1280px] mx-auto p-4">
         <ApolloClientProvider>
           <Provider>{children}</Provider>
         </ApolloClientProvider>

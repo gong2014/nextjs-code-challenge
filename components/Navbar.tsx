@@ -14,9 +14,7 @@ export default async function NavBar() {
       <Container maxW="container.xl" py={4}>
         <Flex justify="space-between" align="center">
           <Link href="/dashboard" passHref>
-            <Text fontSize="xl" fontWeight="bold" cursor="pointer">
-              Dashboard
-            </Text>
+            <Text fontSize="xl" fontWeight="bold" cursor="pointer"></Text>
           </Link>
 
           {userInfo ? (

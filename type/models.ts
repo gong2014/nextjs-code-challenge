@@ -11,3 +11,9 @@ export type Character = {
   gender: string;
   image: string;
 };
+export type PageInfo = {
+  count: number;
+  pages: number;
+  next: string;
+  prev: string;
+};

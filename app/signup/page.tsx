@@ -22,7 +22,7 @@ export default function Home() {
     jobTitle: "",
   });
 
-  const [error, setError] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleInputChange = (field: keyof UserInfo, value: string) => {
     setUserInfo((pre) => ({
@@ -31,19 +31,35 @@ export default function Home() {
     }));
   };
 
-  const handleCancel = () => {
+  const handleClear = () => {
     setUserInfo({
       userName: "",
       jobTitle: "",
     });
+    setError(null);
+  };
+
+  const validateString = (value: string) => {
+    const stringRegex = /^[a-zA-Z\s]+$/;
+    return stringRegex.test(value);
   };
 
   const handleSubmit = async () => {
+    if (!validateString(userInfo.userName)) {
+      setError("User name not empty and can only contain letters and spaces");
+      return;
+    }
+
+    if (!validateString(userInfo.jobTitle)) {
+      setError("Job title not empty and can only contain letters and spaces");
+      return;
+    }
+
     const response = await submitUserInfo(userInfo);
     if (response) {
       route.push("/");
     } else {
-      setError(true);
+      setError("Sign up fail");
       console.log(`login fail ${response}`);
     }
   };
@@ -68,7 +84,7 @@ export default function Home() {
       <Heading size="2xl" className="mb-6"></Heading>
       <Card.Root maxW="sm">
         <Card.Header>
-          {error && <Alert status="error" title="Login Fail" />}
+          {error && <Alert status="error" title={error} />}
           <Card.Title>Sign up</Card.Title>
           <Card.Description>
             Fill in the form below to create an account
@@ -93,8 +109,8 @@ export default function Home() {
           </Stack>
         </Card.Body>
         <Card.Footer justifyContent="flex-end">
-          <Button variant="outline" onClick={() => handleCancel()}>
-            Cancel
+          <Button variant="outline" onClick={() => handleClear()}>
+            Clear
           </Button>
           <Button variant="solid" onClick={handleSubmit}>
             Sign in

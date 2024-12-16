@@ -6,19 +6,21 @@ import {
   PaginationPrevTrigger,
   PaginationRoot,
 } from "@/components/ui/pagination";
+import { PageInfo } from "@/type/models";
 
 export const PaginationBlock = ({
   pageInfo,
   page,
   handlePageChange,
 }: {
-  pageInfo: { count: number };
+  pageInfo: PageInfo;
   page: number;
   handlePageChange: (page: number) => void;
 }) => {
   return (
     <PaginationRoot
       count={pageInfo?.count ?? 0}
+      pageSize={20}
       page={page}
       variant="solid"
       className="mx-auto"

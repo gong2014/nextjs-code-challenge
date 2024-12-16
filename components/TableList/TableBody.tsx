@@ -21,7 +21,7 @@ export const TableBody = ({
               height={50}
             />
           </Table.Cell>
-          <Table.Cell>{character.name}</Table.Cell>
+          <Table.Cell whiteSpace="normal">{character.name}</Table.Cell>
           <Table.Cell>{character.gender}</Table.Cell>
           <Table.Cell>{character.status}</Table.Cell>
         </Table.Row>
